@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Trapeadores - NextGen Escobas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Animación suave para las tarjetas */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Estilos opcionales para mejorar la apariencia del scroll en algunos navegadores */
+        #product-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+        #product-grid::-webkit-scrollbar-thumb {
+            background-color: #93C5FD; /* blue-300 */
+            border-radius: 10px;
+        }
+        #product-grid::-webkit-scrollbar-track {
+            background: #E0F2F7; /* cyan-50 */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Header / Navbar -->
+    <header class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            
+            <!-- Contenedor para el botón de inicio y la marca -->
+            <div class="flex items-center space-x-6">
+                <!-- Botón de Inicio añadido aquí -->
+                <a href="https://jimenhersolutions.github.io/NextGen/" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-blue-700 transition duration-150">
+                    <i class="fa-solid fa-house text-xl"></i>
+                    <span class="hidden sm:inline font-medium">Inicio</span>
+                </a>
+
+                <!-- Marca/Logo -->
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-broom text-2xl"></i>
+                    <h1 class="text-2xl font-bold">NextGen <span class="text-yellow-400">Escobas</span></h1>
+                </div>
+            </div>
+            <!-- El carrito de compras (eliminado) -->
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <div class="bg-blue-50 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-extrabold text-blue-900 mb-4">Colección Arcoíris de escobas</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">La misma calidad de premium, ahora disponible en 5 colores vibrantes para organizar tu limpieza por áreas.</p>
+        </div>
+    </div>
+
+    <!-- Grid de Productos (Modificado para scroll horizontal) -->
+    <main class="py-12">
+        <div class="container mx-auto">
+            <!-- Título para la sección de productos -->
+            <h3 class="text-2xl font-semibold text-gray-800 px-4 mb-6">Nuestros Modelos Estándar</h3>
+            
+            <!-- Contenedor con scroll horizontal -->
+            <div class="flex overflow-x-auto space-x-6 px-4 pb-12" id="product-grid">
+                <!-- Los productos se generarán aquí mediante JS -->
+            </div>
+            
+            <!-- Nueva Imagen de Banner de Colores -->
+            <div class="mt-8 px-4">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center sm:text-left">¡Nuevos Colores en Tienda!</h3>
+                <img src="https://i.imgur.com/Uqw5SfY.jpeg" alt="Banner con los nuevos colores de escobas" 
+                     class="w-full h-auto object-cover rounded-lg shadow-xl border-4 border-white transition duration-300 hover:scale-[1.01]">
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 NextGen Escobas. Todos los derechos reservados.</p>
+            <p class="text-gray-400 text-sm mt-2">Precios sujetos a cambio sin previo aviso.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Datos de las 6 Escobas, actualizados con imágenes reales y precios de $180.00
+        const products = [
+            { id: 1, color: "Rosa coral", hex: "F7879A", price: 180.00, desc: "Ideal para baños y cocinas.", imageUrl: "https://i.imgur.com/4aNLC6E.jpeg" },
+            { id: 2, color: "Azul cielo", hex: "3B82F6", price: 180.00, desc: "Perfecto para áreas generales y oficinas.", imageUrl: "https://i.imgur.com/WxrVgdQ.jpeg" },
+            { id: 3, color: "Verde limón", hex: "22C55E", price: 180.00, desc: "Recomendado para cocinas y comedores.", imageUrl: "https://i.imgur.com/8p3ZXjp.jpeg" },
+            { id: 4, color: "Negro Absoluto", hex: "1F2937", price: 180.00, desc: "Máxima discreción, profesional y moderno.", imageUrl: "https://i.imgur.com/I2mLwsZ.jpeg" },
+            { id: 5, color: "café", hex: "a18262", price: 180.00, desc: "Alta resistencia y estilo atemporal.", imageUrl: "https://i.imgur.com/xFkSHDb.jpeg" },
+            { id: 4, color: "Escoba Angular", hex: "9C9C9C", price: 180.00, desc: "Máxima durabilidad y resistencia.", imageUrl: "https://i.imgur.com/We9hSEk.jpeg" },
+        ];
+
+        const grid = document.getElementById('product-grid');
+
+        // Función para renderizar los productos
+        products.forEach(product => {
+            const card = document.createElement('div');
+            // Clases para desplazamiento: flex-none y w-72 aseguran el ancho fijo y que no se envuelvan.
+            card.className = "flex-none w-72 bg-white rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover border border-gray-100 flex flex-col";
+            
+            card.innerHTML = `
+                <div class="relative">
+                    <!-- Usamos la URL de la imagen proporcionada por el usuario -->
+                    <img src="${product.imageUrl}" alt="Trapeador color ${product.color}" class="w-full h-56 object-cover">
+                    <div class="absolute top-2 right-2 bg-white px-2 py-1 rounded-md text-xs font-bold shadow-sm uppercase tracking-wide text-gray-600">
+                        Microfibra
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex items-center gap-2 mb-2">
+                        <!-- Pequeño círculo de color representativo -->
+                        <div class="w-4 h-4 rounded-full border border-gray-300 shadow-sm" style="background-color: #${product.hex};"></div>
+                        <h3 class="text-xl font-bold text-gray-800">${product.color}</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4 flex-1">${product.desc}</p>
+                    
+                    <!-- Solo el precio, sin el botón de agregar -->
+                    <div class="mt-auto border-t pt-4">
+                        <span class="text-3xl font-bold text-blue-600">$${product.price.toFixed(2)}</span>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
